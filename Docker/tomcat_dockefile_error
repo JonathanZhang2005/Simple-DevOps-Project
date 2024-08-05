@@ -1,0 +1,31 @@
+[root@Docker-Host ~]# docker build -t mytomcat .
+[+] Building 7.7s (6/11)                                                                                                                                                                             docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                           0.0s
+ => => transferring dockerfile: 351B                                                                                                                                                                           0.0s
+ => [internal] load metadata for docker.io/library/centos:latest                                                                                                                                               0.3s
+ => [internal] load .dockerignore                                                                                                                                                                              0.0s
+ => => transferring context: 2B                                                                                                                                                                                0.0s
+ => [1/7] FROM docker.io/library/centos:latest@sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177                                                                                         6.3s
+ => => resolve docker.io/library/centos:latest@sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177                                                                                         0.0s
+ => => sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177 762B / 762B                                                                                                                     0.0s
+ => => sha256:a1801b843b1bfaf77c501e7a6d3f709401a1e0c83863037fa3aab063a7fdb9dc 529B / 529B                                                                                                                     0.0s
+ => => sha256:5d0da3dc976460b72c77d94c8a1ad043720b0416bfc16c52c45d4847e53fadb6 2.14kB / 2.14kB                                                                                                                 0.0s
+ => => sha256:a1d0c75327776413fa0db9ed3adcdbadedc95a662eb1d360dad82bb913f8a1d1 83.52MB / 83.52MB                                                                                                               1.1s
+ => => extracting sha256:a1d0c75327776413fa0db9ed3adcdbadedc95a662eb1d360dad82bb913f8a1d1                                                                                                                      5.0s
+ => https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz                                                                                                                           0.2s
+ => ERROR [2/7] RUN yum install java -y                                                                                                                                                                        1.0s
+------                                                                                                                                                                                                              
+ > [2/7] RUN yum install java -y:
+0.928 CentOS Linux 8 - AppStream                      0.0  B/s |   0  B     00:00    
+0.930 Errors during downloading metadata for repository 'appstream':
+0.930   - Curl error (6): Couldn't resolve host name for http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream&infra=container [Could not resolve host: mirrorlist.centos.org]
+0.938 Error: Failed to download metadata for repo 'appstream': Cannot prepare internal mirrorlist: Curl error (6): Couldn't resolve host name for http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream&infra=container [Could not resolve host: mirrorlist.centos.org]
+------
+Dockerfile:2
+--------------------
+   1 |     FROM centos:latest
+   2 | >>> RUN yum install java -y
+   3 |     RUN mkdir /opt/tomcat
+   4 |     WORKDIR /opt/tomcat
+--------------------
+ERROR: failed to solve: process "/bin/sh -c yum install java -y" did not complete successfully: exit code: 1
